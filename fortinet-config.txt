@@ -1,0 +1,28 @@
+config sys global
+set hostname ${HOSTNAME}
+end
+config system interface
+edit port1
+set ip ${USER_NIC_ID1_PRE_ALLOCATED_ADDRESS} ${USER_NIC_ID1_MASK}
+set allowaccess https ssh http
+end
+config system interface
+edit port2
+set ip ${USER_NIC_ID2_PRE_ALLOCATED_ADDRESS} ${USER_NIC_ID2_MASK}
+set allowaccess https ssh http
+end
+config router static
+edit 1
+set device port1
+set gateway ${USER_NIC_ID1_GW}
+end
+config system interface
+edit mgmt
+set mode static
+set ip ${NICID_0_IP_ADDRESS} ${NICID_0_NETMASK}
+set allowaccess https ssh http icmp
+end
+config system admin
+edit admin
+set password admin
+end
